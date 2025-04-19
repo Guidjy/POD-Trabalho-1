@@ -13,12 +13,12 @@ int main(int agrc, char *argv[]) {
     struct timespec antes;
     struct timespec depois;
 
-    // cria uma lista e a preenche com inteiros positivos aleatórios entre um intervalo
+    // cria uma lista e a preenche com inteiros positivos aleatórios entre um intervalo de 0 - 100000
     // 100000
     // 1000000 
     // 100000000
     Lista l = lista_cria(100000000);
-    lista_preenche(l, 10000);
+    lista_preenche(l, 100000);
     lista_ordenada(l);
 
     // ordena a lista
