@@ -51,4 +51,6 @@ void linked_insere(linked lista, int num) {
     lista->pri = novo;
 }
 
+// yur
+
 
