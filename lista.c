@@ -85,9 +85,11 @@ void lista_swap(Lista lista, int pos_1, int pos_2) {
 bool lista_ordenada(Lista lista) {
     for (int i = 1; i < lista->n_elem; i++) {
         if (lista->vetor[i] < lista->vetor[i-1]) {
+            printf("Lista não está ordenada ):\n");
             return false;
         }
     }
+    printf("Lista está ordenada (:\n");
     return true;
 }
 

@@ -3,6 +3,7 @@
 #include "lista_encadeada.h"
 #include "heap.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 
 void bubble_sort(Lista lista) {
@@ -124,7 +125,7 @@ void counting_sort(Lista lista) {
 
 void bucket_sort(Lista lista) {
     // inicializa o vetor de buckets
-    Linked buckets[lista->n_elem];
+    Linked *buckets = (Linked*) malloc(sizeof(struct _lista_encadeada) * lista->n_elem);
     for (int i = 0; i < lista->n_elem; i++) {
         buckets[i] = linked_cria();
     }
@@ -133,7 +134,9 @@ void bucket_sort(Lista lista) {
     int k = lista_max(lista);
     // enche os buckets
     for (int i = lista->n_elem - 1; i >= 0; i--) {
-        int pos = lista->vetor[i] * lista->n_elem / (k + 1);
+        int vetori = lista->vetor[i];
+        long long temp = (long long)lista->vetor[i] * lista->n_elem;  // para prevenir overflow
+        int pos = temp / (k + 1);
         linked_insere(buckets[pos], lista->vetor[i]);
     }
 
