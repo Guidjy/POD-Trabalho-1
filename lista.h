@@ -31,6 +31,9 @@ void lista_preenche(Lista lista, int intervalo);
 // troca dois elementos de posição
 void lista_swap(Lista lista, int pos_1, int pos_2);
 
+// retorna true se a lista estiver ordenada
+bool lista_ordenada(Lista lista);
+
 // imprime os elementos de uma Lista
 void lista_imprime(Lista lista);
 

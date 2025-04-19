@@ -82,6 +82,16 @@ void lista_swap(Lista lista, int pos_1, int pos_2) {
 }
 
 
+bool lista_ordenada(Lista lista) {
+    for (int i = 1; i < lista->n_elem; i++) {
+        if (lista->vetor[i] < lista->vetor[i-1]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 void lista_imprime(Lista lista) {
     printf("[");
     for (int i = 0; i < lista->n_elem - 1; i++) {
