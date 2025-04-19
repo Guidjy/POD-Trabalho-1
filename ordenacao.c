@@ -1,5 +1,6 @@
 #include "ordenacao.h"
 #include "lista.h"
+#include "lista_encadeada.h"
 #include "heap.h"
 #include <stdlib.h>
 
@@ -122,16 +123,36 @@ void counting_sort(Lista lista) {
 
 
 void bucket_sort(Lista lista) {
-    // buckets é um vetor de listas (buckets)
-    Lista buckets[lista->n_elem];
-    //for (int i = 0; i < lista->n_elem; i++) {
-    //}
-    // maior valor da lista
-    int k = lista_max(lista);
-    // enchendo os buckets
-    int pos;
-    for (int i = lista->n_elem - 1; i <= 0; i--) {
-        // calcula em qual posição do vetor (bucket) deve se inserir
+    // inicializa o vetor de buckets
+    Linked buckets[lista->n_elem];
+    for (int i = 0; i < lista->n_elem; i++) {
+        buckets[i] = linked_cria();
     }
 
+    // obtem maior valor da lista
+    int k = lista_max(lista);
+    // enche os buckets
+    for (int i = lista->n_elem - 1; i >= 0; i--) {
+        int pos = lista->vetor[i] * lista->n_elem / (k + 1);
+        linked_insere(buckets[pos], lista->vetor[i]);
+    }
+
+    // ordena e concatena os buckets
+    int j = 0;
+    for (int i = 0; i < lista->n_elem; i++) {
+        // passa todos os elementos de buckets[i] para a lista bucket
+        Lista bucket = lista_cria(buckets[i]->n_elem);
+        while (!linked_vazia(buckets[i])) {
+            lista_insere(bucket, linked_remove(buckets[i]));
+        }
+        // ordena bucket
+        insertion_sort(bucket);
+        // concatena o bucket ordenado a lista original
+        for (int k = 0; k < bucket->n_elem; k++) {
+            lista->vetor[j] = bucket->vetor[k];
+            j++;
+        }
+        free(buckets[i]);
+        free(bucket);
+    }
 }
