@@ -13,23 +13,26 @@ typedef struct _no {
 typedef struct _lista_encadeada {
     int n_elem;  // número de elementos na lista
     No pri;      // ponteiro para o primeiro elemento da lista
-} *linked;
+} *Linked;
 
 
 // cria uma lista encadeada
-linked linked_cria();
+Linked linked_cria();
 
 // libera toda a memória alocada para uma lista encadeada
-void linked_destroi(linked lista);
+void linked_destroi(Linked lista);
 
 // retorna true se a lista encadeada estiver vazia
-bool linked_vazia(linked lista);
+bool linked_vazia(Linked lista);
 
 // insere um elemento no início da lista
-void linked_insere(linked lista, int num);
+void linked_insere(Linked lista, int num);
 
 // remove o primeiro elemento da lista e retorna-o
-int linked_remove(linked lista);
+int linked_remove(Linked lista);
+
+// imprime uma lista encadeada
+void linked_imprime(Linked lista);
 
 
 #endif
