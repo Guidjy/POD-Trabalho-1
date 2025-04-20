@@ -4,37 +4,37 @@
 #include <stdbool.h>
 
 struct _lista {
-    int cap;         // capacidade máxima da lista
-    int n_elem;      // número de elementos na lista
-    int *vetor;      // vetor de inteiros
+    int cap;         /* capacidade máxima da lista */
+    int n_elem;      /* número de elementos na lista */
+    int *vetor;      /* vetor de inteiros */
 };
 typedef struct _lista *Lista;
 
-// cria uma lista que suporta "tamanho" elementos
+/* cria uma lista que suporta "tamanho" elementos */
 Lista lista_cria(int tamanho);
 
-// libera tgoda a memória alocada para uma lista
+/* libera toda a memória alocada para uma lista */
 void lista_destroi(Lista lista);
 
-// retorna true se a lista estiver cheia
+/* retorna true se a lista estiver cheia */
 bool lista_cheia(Lista lista);
 
-// insere um inteiro na lista
+/* insere um inteiro na lista */
 void lista_insere(Lista lista, int num);
 
-// retorna o maior valor da lista
+/* retorna o maior valor da lista */
 int lista_max(Lista lista);
 
-// preenche a lista com valores aleatórios em um intervalo
+/* preenche a lista com valores aleatórios em um intervalo */
 void lista_preenche(Lista lista, int intervalo);
 
-// troca dois elementos de posição
+/* troca dois elementos de posição */
 void lista_swap(Lista lista, int pos_1, int pos_2);
 
-// retorna true se a lista estiver ordenada
+/* retorna true se a lista estiver ordenada */
 bool lista_ordenada(Lista lista);
 
-// imprime os elementos de uma Lista
+/* imprime os elementos de uma Lista */
 void lista_imprime(Lista lista);
 
 #endif
