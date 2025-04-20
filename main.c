@@ -1,35 +1,48 @@
-#include "lista.h"
-#include "ordenacao.h"
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include "lista.h"
+#include "ordenacao.h"
 
-
-int main(int agrc, char *argv[]) {
-    // habilita a geração de números aleatórios
+int main(int argc, char *argv[]) {
+    /* habilita a geração de números aleatórios */
     srand(time(0));
 
-    // cria structs para cronometragem
-    struct timespec antes;
-    struct timespec depois;
+    /* variáveis para cronometragem */
+    clock_t inicio, fim;
+    double tempo_gasto;
 
-    // cria uma lista e a preenche com inteiros positivos aleatórios entre um intervalo de 0 - 100000
-    // 100000
-    // 1000000 
-    // 100000000
-    Lista l = lista_cria(100000000);
+    /* cria uma lista e a preenche com inteiros positivos aleatórios */
+    Lista l = lista_cria(atoi(argv[2]));
     lista_preenche(l, 100000);
     lista_ordenada(l);
 
-    // ordena a lista
-    clock_gettime(CLOCK_REALTIME, &antes);
-    bucket_sort(l);
-    clock_gettime(CLOCK_REALTIME, &depois);
+    /* seleciona algoritmo baseado no argumento */
+    int algoritmo = 0; /* default: insertion sort */
+    if (argc >= 2) {
+        if (strcmp(argv[1], "insertion") == 0) {
+            algoritmo = 0;
+        } else if (strcmp(argv[1], "bubble") == 0) {
+            algoritmo = 1;
+        } else if (strcmp(argv[1], "quick") == 0) {
+            algoritmo = 2;
+        } else if (strcmp(argv[1], "heap") == 0) {
+            algoritmo = 3;
+        } else if (strcmp(argv[1], "counting") == 0) {
+            algoritmo = 4;
+        }
+    }
+
+    /* ordena a lista */
+    inicio = clock();
+    bucket_sort(l, algoritmo);
+    fim = clock();
     lista_ordenada(l);
 
-    // calcula o tempo que demorou para ordenar a lista 
-    long long tempo_ordenacao = (depois.tv_sec - antes.tv_sec) * 1000000000LL + (depois.tv_nsec - antes.tv_nsec);
-    printf("Tempo para ordenar %d elementos: %lld nanosegundos\n", l->n_elem, tempo_ordenacao);
+    /* calcula o tempo gasto */
+    tempo_gasto = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+    printf("Tempo para ordenar %d elementos usando %s sort: %f segundos\n", l->n_elem, argv[1], tempo_gasto);
 
     lista_destroi(l);
     return 0;
