@@ -13,6 +13,6 @@ void heap_sort(Lista lista);
 
 void counting_sort(Lista lista);
 
-void bucket_sort(Lista lista);
+void bucket_sort(Lista lista, int algoritmo);
 
 #endif
